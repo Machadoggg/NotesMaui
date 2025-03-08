@@ -5,14 +5,14 @@
              Title="Crear">
 
     <FlexLayout Direction="Column">
-        <VerticalStackLayout Padding="10" FlexLayout.Basis="400" BackgroundColor="Beige">
+        <VerticalStackLayout Padding="10" FlexLayout.Basis="400">
             <Entry x:Name="nameEntryfield" Placeholder="Nombre" />
             <Entry x:Name="emailEntryfield" Placeholder="Email" />
             <Entry x:Name="mobileEntryfield" Placeholder="Teléfono" />
             <Button x:Name="saveButton" Text="Save" Clicked="saveButton_Clicked" />
         </VerticalStackLayout>
         <ScrollView>
-            <VerticalStackLayout BackgroundColor="Beige">
+            <VerticalStackLayout>
                 <ListView x:Name="listView" FlexLayout.Grow="1" HasUnevenRows="True" ItemTapped="listView_ItemTapped">
                     <ListView.ItemTemplate>
                         <DataTemplate>
