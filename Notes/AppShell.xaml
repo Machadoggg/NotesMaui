@@ -8,33 +8,33 @@
 
     <TabBar>
         <ShellContent
-            Title="Notes"
-            ContentTemplate="{DataTemplate local:MainPage}"
+            Title="Crear"
+            ContentTemplate="{DataTemplate local:CreatePage}"
             Icon="{OnPlatform 'icon_notes.png', iOS='icon_notes_ios.png', MacCatalyst='icon_notes_ios.png'}" />
 
         <ShellContent
-            Title="About"
+            Title="Lista"
             ContentTemplate="{DataTemplate local:AboutPage}"
             Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}" />
 
         <ShellContent
-            Title="Notes"
+            Title="Notas"
             ContentTemplate="{DataTemplate local:MainPage}"
             Icon="{OnPlatform 'icon_notes.png', iOS='icon_notes_ios.png', MacCatalyst='icon_notes_ios.png'}" />
 
                 <ShellContent
-            Title="About"
+            Title="Mapa"
             ContentTemplate="{DataTemplate local:AboutPage}"
             Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}" />
 
         
         <ShellContent
-            Title="Notes"
+            Title="Fecha"
             ContentTemplate="{DataTemplate local:MainPage}"
             Icon="{OnPlatform 'icon_notes.png', iOS='icon_notes_ios.png', MacCatalyst='icon_notes_ios.png'}" />
 
         <ShellContent
-            Title="About"
+            Title="Acerca"
             ContentTemplate="{DataTemplate local:AboutPage}"
             Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}" />
     </TabBar>
