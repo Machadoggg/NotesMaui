@@ -17,6 +17,7 @@ namespace Notes
 
             builder.Services.AddSingleton<LocalDbService>();
             builder.Services.AddTransient<MainPage>();
+            builder.Services.AddTransient<CreatePage>();
 
 #if DEBUG
             builder.Logging.AddDebug();
