@@ -1,17 +1,17 @@
-using System.Reflection;
 
 namespace Notes;
 
+[QueryProperty(nameof(ItemId), nameof(ItemId))]
 public partial class NotePage : ContentPage
 {
-    string _fileName = Path.Combine(FileSystem.AppDataDirectory, "notes.txt");
+    public string ItemId
+    {
+        set { LoadNote(value); }
+    }
 
     public NotePage()
     {
         InitializeComponent();
-
-        //if (File.Exists(_fileName))
-        //    TextEditor.Text = File.ReadAllText(_fileName);
 
         string appDataPath = FileSystem.AppDataDirectory;
         string randomFileName = $"{Path.GetRandomFileName()}.notes.txt";
@@ -20,7 +20,7 @@ public partial class NotePage : ContentPage
     }
 
 
-    private void LoadNote(string fileName)
+    public void LoadNote(string fileName)
     {
         Note noteModel = new Note();
         noteModel.Filename = fileName;
@@ -34,18 +34,24 @@ public partial class NotePage : ContentPage
         BindingContext = noteModel;
     }
 
-    private void SaveButton_Clicked(object sender, EventArgs e)
+
+    public async void SaveButton_Clicked(object sender, EventArgs e)
     {
-        // Save the file.
-        File.WriteAllText(_fileName, TextEditor.Text);
+        if (BindingContext is Note note)
+            File.WriteAllText(note.Filename, TextEditor.Text);
+
+        await Shell.Current.GoToAsync("..");
     }
 
-    private void DeleteButton_Clicked(object sender, EventArgs e)
+    private async void DeleteButton_Clicked(object sender, EventArgs e)
     {
-        // Delete the file.
-        if (File.Exists(_fileName))
-            File.Delete(_fileName);
+        if (BindingContext is Note note)
+        {
+            // Delete the file.
+            if (File.Exists(note.Filename))
+                File.Delete(note.Filename);
+        }
 
-        TextEditor.Text = string.Empty;
+        await Shell.Current.GoToAsync("..");
     }
 }
