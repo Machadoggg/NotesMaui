@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Notes.DatePage"
              Title="Fecha">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to DATE PAGE!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    
+    <StackLayout Padding="20">
+        <DatePicker x:Name="datePicker" />
+        <TimePicker x:Name="timePicker" />
+        <Button Text="Programar Notificación" Clicked="OnScheduleNotificationClicked" />
+    </StackLayout>
 </ContentPage>
