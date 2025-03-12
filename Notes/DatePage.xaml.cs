@@ -4,15 +4,21 @@ namespace Notes;
 
 public partial class DatePage : ContentPage
 {
-	public DatePage()
+    private readonly LocalDbService _localDbService;
+    private int _editNotifyId;
+
+    public DatePage(LocalDbService localDbService)
 	{
 		InitializeComponent();
-	}
+        _localDbService = localDbService;
+        Task.Run(async () => listView.ItemsSource = await _localDbService.GetNotify());
+    }
 
-    private void OnScheduleNotificationClicked(object sender, EventArgs e)
+
+    private async void OnScheduleNotificationClicked(object sender, EventArgs e)
     {
-        var selectedDate = datePicker.Date;
-        var selectedTime = timePicker.Time;
+        var selectedDate = datePickerfield.Date;
+        var selectedTime = timePickerfield.Time;
 
         var notificationTime = new DateTime(
             selectedDate.Year,
@@ -26,15 +32,47 @@ public partial class DatePage : ContentPage
         if (notificationTime > DateTime.Now)
         {
             ScheduleNotification(notificationTime);
-            DisplayAlert("Éxito", $"Notificación programada.{notificationTime}", "OK");
+
+
+
+
+            if (_editNotifyId == 0)
+            {
+                //add customer
+                await _localDbService.CreateNotify(new Notify
+                {
+                    NotifyName = nameEntryfield.Text,
+                    Date = selectedDate,
+                    Hour = selectedTime,
+                });
+            }
+            else
+            {
+                //edit customer
+                await _localDbService.UpdateNotify(new Notify
+                {
+                    Id = _editNotifyId,
+                    NotifyName = nameEntryfield.Text,
+                    Date = selectedDate,
+                    Hour = selectedTime,
+                });
+
+                _editNotifyId = 0;
+            }
+
+            nameEntryfield.Text = string.Empty;
+            datePickerfield.Date = DateTime.Now.Date;
+            timePickerfield.Time = new TimeSpan(0, 0, 0);
+
+            listView.ItemsSource = await _localDbService.GetNotify();   
         }
         else
         {
-            DisplayAlert("Error", "La fecha y hora deben ser futuras.", "OK");
+            await DisplayAlert("Error", "La fecha y hora deben ser futuras.", "OK");
         }
     }
 
-    private void ScheduleNotification(DateTime notificationTime)
+    private async void ScheduleNotification(DateTime notificationTime)
     {
         var notification = new NotificationRequest
         {
@@ -50,6 +88,27 @@ public partial class DatePage : ContentPage
         };
 
         // Programar la notificación
-        LocalNotificationCenter.Current.Show(notification);
+        await  LocalNotificationCenter.Current.Show(notification);
+    }
+
+    private async void listView_ItemTapped2(object sender, ItemTappedEventArgs e)
+    {
+        var notify = (Notify)e.Item;
+        var action = await DisplayActionSheet("Action", "Cancel", null, "Edit", "Delete");
+
+        switch (action)
+        {
+            case "Edit":
+                _editNotifyId = notify.Id;
+                nameEntryfield.Text = notify.NotifyName;
+                datePickerfield.Date = notify.Date;
+                timePickerfield.Time = notify.Hour;
+                break;
+
+            case "Delete":
+                await _localDbService.DeleteNotify(notify);
+                listView.ItemsSource = await _localDbService.GetNotify();
+                break;
+        }
     }
 }

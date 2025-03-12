@@ -13,6 +13,7 @@ namespace Notes
         {
             _connection = new SQLiteAsyncConnection(Path.Combine(FileSystem.AppDataDirectory, DB_NAME));
             _connection.CreateTableAsync<Customer>();
+            _connection.CreateTableAsync<Notify>();
         }
 
 
@@ -61,5 +62,56 @@ namespace Notes
         {
             await _connection.DeleteAsync(customer);
         }
+
+
+
+
+        public async Task<List<Notify>> GetNotify()
+        {
+            var notify = await _connection.Table<Notify>().ToListAsync();
+            return notify.OrderByDescending(c => c.Id).ToList();
+        }
+
+        public async Task<Notify> GetNotifyById(int id)
+        {
+            return await _connection.Table<Notify>().Where(x => x.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task CreateNotify(Notify notify)
+        {
+            var validationContext = new ValidationContext(notify);
+            var validationResults = new List<ValidationResult>();
+
+            // Validar el objeto Customer
+            bool isValid = Validator.TryValidateObject(notify, validationContext, validationResults, true);
+
+            if (!isValid)
+            {
+                // Mostrar errores de validación en una alerta
+                string errorMessage = "No se puede guardar la notificación debido a los siguientes errores:\n";
+                foreach (var validationResult in validationResults)
+                {
+                    errorMessage += $"- {validationResult.ErrorMessage}\n";
+                }
+
+                // Mostrar la alerta al usuario
+                await Shell.Current.DisplayAlert("Error", errorMessage, "Aceptar");
+                return;
+            }
+            await _connection.InsertAsync(notify);
+            await Shell.Current.DisplayAlert("Éxito", "Notificación programada correctamente.", "Aceptar");
+            
+        }
+
+        public async Task UpdateNotify(Notify notify)
+        {
+            await _connection.UpdateAsync(notify);
+        }
+
+        public async Task DeleteNotify(Notify notify)
+        {
+            await _connection.DeleteAsync(notify);
+        }
+
     }
 }
