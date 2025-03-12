@@ -44,6 +44,7 @@ public partial class DatePage : ContentPage
                     NotifyName = nameEntryfield.Text,
                     Date = selectedDate.Date,
                     Hour = selectedTime,
+                    NotificationTime = notificationTime,
                 });
             }
             else
@@ -55,6 +56,7 @@ public partial class DatePage : ContentPage
                     NotifyName = nameEntryfield.Text,
                     Date = selectedDate.Date,
                     Hour = selectedTime,
+                    NotificationTime = notificationTime,
                 });
 
                 _editNotifyId = 0;
@@ -62,7 +64,7 @@ public partial class DatePage : ContentPage
 
             nameEntryfield.Text = string.Empty;
             datePickerfield.Date = DateTime.Now.Date;
-            timePickerfield.Time = new TimeSpan(0, 0, 0);
+            timePickerfield.Time = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, 0);
 
             listView.ItemsSource = await _localDbService.GetNotify();   
         }

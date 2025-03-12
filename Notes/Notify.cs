@@ -28,6 +28,10 @@ namespace Notes
 
         [Column("hour")]
         public TimeSpan Hour { get; set; } = default!;
+
+        
+        [Column("notification_time ")]
+        public DateTime NotificationTime { get; set; } = default!;
     }
 }
 
