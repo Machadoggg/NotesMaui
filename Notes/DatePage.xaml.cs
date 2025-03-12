@@ -38,22 +38,22 @@ public partial class DatePage : ContentPage
 
             if (_editNotifyId == 0)
             {
-                //add customer
+                //add notify
                 await _localDbService.CreateNotify(new Notify
                 {
                     NotifyName = nameEntryfield.Text,
-                    Date = selectedDate,
+                    Date = selectedDate.Date,
                     Hour = selectedTime,
                 });
             }
             else
             {
-                //edit customer
+                //edit notify
                 await _localDbService.UpdateNotify(new Notify
                 {
                     Id = _editNotifyId,
                     NotifyName = nameEntryfield.Text,
-                    Date = selectedDate,
+                    Date = selectedDate.Date,
                     Hour = selectedTime,
                 });
 
@@ -87,8 +87,8 @@ public partial class DatePage : ContentPage
             }
         };
 
-        // Programar la notificación
-        await  LocalNotificationCenter.Current.Show(notification);
+        // Program notify
+        await LocalNotificationCenter.Current.Show(notification);
     }
 
     private async void listView_ItemTapped2(object sender, ItemTappedEventArgs e)

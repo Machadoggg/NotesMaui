@@ -82,19 +82,19 @@ namespace Notes
             var validationContext = new ValidationContext(notify);
             var validationResults = new List<ValidationResult>();
 
-            // Validar el objeto Customer
+            // Validate object notify
             bool isValid = Validator.TryValidateObject(notify, validationContext, validationResults, true);
 
             if (!isValid)
             {
-                // Mostrar errores de validación en una alerta
+                // Show errors validation alert
                 string errorMessage = "No se puede guardar la notificación debido a los siguientes errores:\n";
                 foreach (var validationResult in validationResults)
                 {
                     errorMessage += $"- {validationResult.ErrorMessage}\n";
                 }
 
-                // Mostrar la alerta al usuario
+                // Show alert user
                 await Shell.Current.DisplayAlert("Error", errorMessage, "Aceptar");
                 return;
             }

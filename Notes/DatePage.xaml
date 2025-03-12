@@ -25,8 +25,8 @@
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
-                                        <Label Grid.Column="0" Text="{Binding Date}" />
-                                        <Label Grid.Column="2" Text="{Binding Hour}" FontAttributes="Bold" />
+                                        <Label Grid.Column="0" Text="{Binding Date, StringFormat='{0:yyyy-MM-dd}'}" />
+                                        <Label Grid.Column="2" Text="{Binding Hour, StringFormat='{0:hh\\:mm}'}" FontAttributes="Bold" />
                                     </Grid>
                                 </VerticalStackLayout>
                             </ViewCell>
