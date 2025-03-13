@@ -106,11 +106,17 @@ namespace Notes
         public async Task UpdateNotify(Notify notify)
         {
             await _connection.UpdateAsync(notify);
+            await Shell.Current.DisplayAlert("Éxito", "Notificación editada correctamente.", "Aceptar");
         }
 
         public async Task DeleteNotify(Notify notify)
         {
-            await _connection.DeleteAsync(notify);
+            var response = await Shell.Current.DisplayAlert("Cuidado", "Esta seguro de eliminar la notificación?", "Aceptar", "Cancelar");
+            if (response)
+            {
+                await _connection.DeleteAsync(notify);
+                await Shell.Current.DisplayAlert("Éxito", "Notificación eliminada correctamente.", "Aceptar");
+            }
         }
 
     }
