@@ -64,7 +64,7 @@ public partial class DatePage : ContentPage
 
             nameEntryfield.Text = string.Empty;
             datePickerfield.Date = DateTime.Now.Date;
-            timePickerfield.Time = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, 0);
+            timePickerfield.Time = new TimeSpan(0, 0, 0);
 
             listView.ItemsSource = await _localDbService.GetNotify();   
         }
@@ -79,9 +79,9 @@ public partial class DatePage : ContentPage
         var notification = new NotificationRequest
         {
             NotificationId = 1001,
-            Title = "App Name",
-            Subtitle = "Hello",
-            Description = "Description",
+            Title = "Notes",
+            Subtitle = $"Notificación: {nameEntryfield.Text}",
+            Description = nameEntryfield.Text,
             BadgeNumber = 42,
             Schedule = new NotificationRequestSchedule
             {
