@@ -83,6 +83,7 @@ public partial class DatePage : ContentPage
             Subtitle = $"Notificación: {nameEntryfield.Text}",
             Description = nameEntryfield.Text,
             BadgeNumber = 42,
+            CategoryType = NotificationCategoryType.Alarm,
             Schedule = new NotificationRequestSchedule
             {
                 NotifyTime = notificationTime
