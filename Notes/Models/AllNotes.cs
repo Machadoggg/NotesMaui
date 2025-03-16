@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
-using Notes.Models;
 
-namespace Notes
+namespace Notes.Models
 {
     public class AllNotes
     {
