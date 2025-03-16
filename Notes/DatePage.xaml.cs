@@ -87,7 +87,15 @@ public partial class DatePage : ContentPage
             Schedule = new NotificationRequestSchedule
             {
                 NotifyTime = notificationTime
-            }
+            },
+            Android = new Plugin.LocalNotification.AndroidOption.AndroidOptions
+            {
+                AutoCancel = true,
+                IconSmallName = { ResourceName = "icon_notes" },
+                IconLargeName = { ResourceName = "icon_about" }
+            },
+            Silent = false,
+            Image = { ResourceName = "dotnet_bot" }
         };
 
         // Program notify
