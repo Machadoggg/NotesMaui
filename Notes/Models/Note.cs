@@ -35,5 +35,15 @@
                     Date = DateTime.Now,
                 };  
         }
+
+        public static IEnumerable<Note> LoadAll()
+        {
+            string appDataPath = FileSystem.AppDataDirectory;
+
+            return Directory
+                .EnumerateFiles(appDataPath, "*.notes.txt")
+                .Select(filename => Note.Load(Path.GetFileName(filename)))
+                .OrderByDescending(note => note.Date);
+        }
     }
 }
