@@ -1,12 +1,10 @@
-﻿
-
-using SQLite;
+﻿using SQLite;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using ColumnAttribute = SQLite.ColumnAttribute;
 using TableAttribute = SQLite.TableAttribute;
 
-namespace Notes
+namespace Notes.Models
 {
     [Table("notify")]
     public class Notify
@@ -29,7 +27,7 @@ namespace Notes
         [Column("hour")]
         public TimeSpan Hour { get; set; } = default!;
 
-        
+
         [Column("notification_time ")]
         public DateTime NotificationTime { get; set; } = default!;
     }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using ColumnAttribute = SQLite.ColumnAttribute;
 using TableAttribute = SQLite.TableAttribute;
 
-namespace Notes
+namespace Notes.Models
 {
     [Table("customer")]
     public class Customer

@@ -1,3 +1,4 @@
+using Notes.Models;
 using Plugin.LocalNotification;
 
 namespace Notes;

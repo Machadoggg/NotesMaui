@@ -1,4 +1,4 @@
-﻿using Notes;
+﻿using Notes.Models;
 using SQLite;
 using System.ComponentModel.DataAnnotations;
 
