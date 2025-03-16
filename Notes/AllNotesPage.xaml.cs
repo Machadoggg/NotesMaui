@@ -1,4 +1,5 @@
 using Notes.Models;
+using Notes.Views;
 
 namespace Notes;
 
