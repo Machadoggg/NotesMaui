@@ -1,4 +1,6 @@
 
+using Notes.Models;
+
 namespace Notes;
 
 [QueryProperty(nameof(ItemId), nameof(ItemId))]

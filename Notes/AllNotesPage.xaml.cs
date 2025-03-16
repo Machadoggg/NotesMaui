@@ -1,3 +1,5 @@
+using Notes.Models;
+
 namespace Notes;
 
 public partial class AllNotesPage : ContentPage

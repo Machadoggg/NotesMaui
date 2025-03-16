@@ -1,4 +1,4 @@
-﻿namespace Notes
+﻿namespace Notes.Models
 {
     public class Note
     {
